@@ -10,8 +10,8 @@ from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
 msg = """
-Reading from the keyboard  and Publishing to Twist!
----------------------------
+Reading from the keyboard and Publishing to Twist!
+--------------------------
 Moving around:
    u    i    o
    j    k    l
@@ -76,10 +76,10 @@ def getKey():
 def vels(speed,turn):
     return "currently:\tspeed %s\tturn %s " % (speed,turn)
 
-if __name__=="__main__":
+if __name__=='__main__':
     settings = termios.tcgetattr(sys.stdin)
 
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+    pub = rospy.Publisher('keyboard/keyup', Twist, queue_size = 1)
     rospy.init_node('teleop_twist_keyboard')
 
     speed = rospy.get_param("~speed", 0.5)
@@ -131,3 +131,7 @@ if __name__=="__main__":
         pub.publish(twist)
 
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+
+
+
+
